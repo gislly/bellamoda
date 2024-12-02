@@ -1,19 +1,15 @@
 import 'package:sqflite/sqflite.dart';
-import 'package: untitled1/bd/db_helper.dart'; // Substitua pelo caminho correto para o DBHelper
-import 'package: untitled1/domain/cataloopcaovestido.dart'; // Substitua pelo caminho correto para sua classe
+import 'package: untitled1/bd/db_helper.dart'; 
+import 'package: untitled1/domain/cataloopcaovestido.dart';
 
 
 class VestidoDao {
-  // Método para listar todos os vestidos
   Future<List<Catalogodoopcoesvestidos>> listarVestidos() async {
-    // Inicializar o banco de dados
     Database database = await DBHelper().initDB();
 
-    // Query para buscar todos os vestidos
     String sql = 'SELECT * FROM VESTIDOS;';
     var result = await database.rawQuery(sql);
 
-    // Converter os resultados em objetos Catalogodoopcoesvestidos
     List<Catalogodoopcoesvestidos> lista = [];
     for (var json in result) {
       Catalogodoopcoesvestidos vestido = Catalogodoopcoesvestidos.fromJson(json);
@@ -23,7 +19,6 @@ class VestidoDao {
     return lista;
   }
 
-  // Método para inserir um vestido no banco de dados
   Future<void> inserirVestido(Catalogodoopcoesvestidos vestido) async {
     Database database = await DBHelper().initDB();
 
