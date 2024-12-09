@@ -1,7 +1,9 @@
-import 'package:tela/esqueceuasenha_page.dart';
-import 'package:tela/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:tela/telacadastro_page.dart';
+import 'package:untitled1/telacadastro_page.dart';
+
+import 'esqueceuasenha_page.dart';
+import 'home_pageduda.dart';
+
 
 class TelaPage extends StatefulWidget {
   const TelaPage({super.key});

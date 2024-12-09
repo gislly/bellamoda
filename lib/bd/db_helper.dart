@@ -15,10 +15,10 @@ class DBHelper {
   }
 
   FutureOr<void> onCreate(Database db, int version) async {
-    String sql =
+    String
+    sql =
         'CREATE TABLE VESTIDOS (id INTEGER PRIMARY KEY, url_image varchar(100), titulo varchar(100), preço varchar(100));';
     await db.execute(sql);
-
 
     sql =
     "INSERT INTO PACOTE (id, url_image, titulo, preco) VALUES (1, 'https://mirak.jetassets.com.br/produto/20240722213142_7509992491_D.jpg', 'VESTIDO DIANA MIDI AZUL MARINO', '359,00');";
