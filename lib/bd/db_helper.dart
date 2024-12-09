@@ -29,5 +29,6 @@ class DBHelper {
     sql =
     "INSERT INTO PACOTE (id, url_image, titulo, preco) VALUES (3, 'https://mirak.jetassets.com.br/produto/20241007185918_3470996530_D.jpg', 'VESTIDO NOEMIA OF WHITE', '320,00');";
     await db.execute(sql);
+    
   }
 }
