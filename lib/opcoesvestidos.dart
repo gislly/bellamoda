@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/bd/Databasedoopcoesvestidos.dart';
-import 'package:untitled1/carrinho.dart';
+import 'package:untitled1/carrinho_page.dart';
 import 'package:untitled1/domain/Catalogodovestido.dart';
 import 'package:untitled1/Vestido2_page.dart';
 import 'package:untitled1/Vestido3_page.dart';
