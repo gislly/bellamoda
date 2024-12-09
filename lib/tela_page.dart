@@ -103,13 +103,20 @@ class _TelaPageState extends State<TelaPage> {
               SizedBox(height: 30),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    // Validar o Form
                     if (formKey.currentState!.validate()) {
                       String email = emailController.text;
                       String senha = senhaController.text;
 
-                      if (email == 'contatobellamoda@gmail.com' &&
-                          senha == 'roupas123') {
+                      // Chama a autenticação usando o UserDao
+                      bool auth = await UserDao().autenticar(email, senha);
+
+                      if (auth) {
+                        // Se a autenticação for bem-sucedida, salva o estado do usuário
+                        SharedPrefs().setUser(true);
+
+                        // Navega para a HomePage
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -119,6 +126,7 @@ class _TelaPageState extends State<TelaPage> {
                           ),
                         );
                       } else {
+                        // Se a autenticação falhar, exibe uma mensagem no console
                         print('Usuário e/ou Senha incorreto(s)!');
                       }
                     }
@@ -183,9 +191,14 @@ class _TelaPageState extends State<TelaPage> {
                 ),
               ),
             ],
+
+
           ),
         ),
       ),
+
     );
+
+
   }
 }
