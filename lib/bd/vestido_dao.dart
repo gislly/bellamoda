@@ -3,6 +3,12 @@ import 'package:untitled1/bd/db_helper.dart';
 import 'package:untitled1/domain/Catalogodoopcoesvestidos.dart';
 
 class VestidoDao {
+
+  saveVestido() async {
+
+  }
+
+
   Future<List<Catalogodoopcoesvestidos>> listarVestidos() async {
     Database database = await DBHelper().initDB();
 

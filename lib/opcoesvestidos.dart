@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:untitled1/bd/Databasedoopcoesvestidos.dart';
 import 'package:untitled1/bd/vestido_dao.dart';
 import 'package:untitled1/carrinho.dart';
-import 'package:untitled1/domain/Catalogodovestido.dart';
 import 'package:untitled1/Vestido2_page.dart';
 import 'package:untitled1/Vestido3_page.dart';
 import 'package:untitled1/Vestido_page.dart';
 import 'package:untitled1/favoritos.dart';
-import 'package:untitled1/login.dart';
 import 'domain/Catalogodoopcoesvestidos.dart';
 
 
@@ -19,7 +17,7 @@ class SegundaPagina extends StatefulWidget {
 }
 
 class _SegundaPaginaState extends State<SegundaPagina> {
-  List<Vestido> vestidos = [];
+  List<> vestidos = [];
   bool showSearchField = false;
 
   @override
