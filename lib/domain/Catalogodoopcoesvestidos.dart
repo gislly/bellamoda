@@ -9,11 +9,19 @@ class Catalogodoopcoesvestidos {
     required this.preco,
   });
 
-  static Catalogodoopcoesvestidos fromJson(Map<String, Object?> json) {
+  factory Catalogodoopcoesvestidos.fromJson(Map<String, dynamic> json) {
     return Catalogodoopcoesvestidos(
-      urlImage: json['urlImage'] as String,
-      titulo: json['titulo'] as String,
-      preco: json['preco'] as String,
+      urlImage: json['url_image'],
+      titulo: json['titulo'],
+      preco: json['preco'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'url_image': urlImage,
+      'titulo': titulo,
+      'preco': preco,
+    };
   }
 }
