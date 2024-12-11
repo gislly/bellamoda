@@ -1,33 +1,27 @@
-import 'package:sqflite/sqflite.dart';
-import 'package: untitled1/bd/db_helper.dart'; 
-import 'package: untitled1/domain/cataloopcaovestido.dart';
+class Catalogodoopcoesvestidos {
+  String urlImage;
+  String titulo;
+  String preco;
 
+  Catalogodoopcoesvestidos({
+    required this.urlImage,
+    required this.titulo,
+    required this.preco,
+  });
 
-class VestidoDao {
-  Future<List<Catalogodoopcoesvestidos>> listarVestidos() async {
-    Database database = await DBHelper().initDB();
-
-    String sql = 'SELECT * FROM VESTIDOS;';
-    var result = await database.rawQuery(sql);
-
-    List<Catalogodoopcoesvestidos> lista = [];
-    for (var json in result) {
-      Catalogodoopcoesvestidos vestido = Catalogodoopcoesvestidos.fromJson(json);
-      lista.add(vestido);
-    }
-
-    return lista;
-  }
-
-  Future<void> inserirVestido(Catalogodoopcoesvestidos vestido) async {
-    Database database = await DBHelper().initDB();
-
-    await database.insert(
-      'VESTIDOS',
-      vestido.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
+  factory Catalogodoopcoesvestidos.fromJson(Map<String, dynamic> json) {
+    return Catalogodoopcoesvestidos(
+      urlImage: json['url_image'],
+      titulo: json['titulo'],
+      preco: json['preco'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'url_image': urlImage,
+      'titulo': titulo,
+      'preco': preco,
+    };
+  }
 }
-
-

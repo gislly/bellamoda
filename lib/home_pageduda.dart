@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'carrinho.dart';
-import 'pesquisa_delegate.dart'; // Ensure this is the correct file for your search delegate implementation
-import 'perfil.dart';
-import 'vestidos.dart';
-import 'blusas.dart';
-import 'calcas.dart';
-import 'shorts.dart';
-import 'bd/database.dart';
-import 'domain/vestuario.dart';
+import 'package:untitled1/carrinho_page.dart';
+import 'package:untitled1/pesquisa_delegate.dart';
+import 'package:untitled1/perfil.dart';
+import 'package:untitled1/vestidos.dart';
+import 'package:untitled1/blusas.dart';
+import 'package:untitled1/calcas.dart';
+import 'package:untitled1/shorts.dart';
+import 'package:untitled1/bd/databaseduda.dart';
+import 'package:untitled1/domain/Vestuario.dart';
+import 'package:untitled1/bd/vestuario_dao.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,6 +18,19 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  List<Vestuario> roupas = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    roupas = await VestuarioDao().listarRoupas();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +64,7 @@ class HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Carrinho()),
+                MaterialPageRoute(builder: (context) => const CarrinhoPage()),
               );
             },
             icon: Icon(Icons.shopping_cart, color: Colors.white),
@@ -60,6 +74,7 @@ class HomePageState extends State<HomePage> {
       backgroundColor: Color(0xFFEFEBE9),
       body: ListView(
         children: [
+          // Banner de propaganda
           Container(
             height: 250,
             child: Image.network(
@@ -89,13 +104,13 @@ class HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('FIQUE POR DENTRO DAS NOVIDADES',
-                    style:
-                    TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                 SizedBox(height: 16),
+                // Exibindo as categorias de roupas carregadas do banco de dados
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: Database.roupas.length,
+                  itemCount: roupas.length,
                   itemBuilder: (context, i) {
                     return GestureDetector(
                       onTap: () {
@@ -103,29 +118,25 @@ class HomePageState extends State<HomePage> {
                           case 0:
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Vestidos()),
+                              MaterialPageRoute(builder: (context) => const Vestidos()),
                             );
                             break;
                           case 1:
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Blusas()),
+                              MaterialPageRoute(builder: (context) => const Blusas()),
                             );
                             break;
                           case 2:
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Calcas()),
+                              MaterialPageRoute(builder: (context) => const Calcas()),
                             );
                             break;
                           case 3:
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Shorts()),
+                              MaterialPageRoute(builder: (context) => const Shorts()),
                             );
                             break;
                           default:
@@ -136,8 +147,9 @@ class HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Row(
                           children: [
+                            // Exibe a imagem e título da categoria
                             Image.network(
-                              Database.roupas[i].imageUrl,
+                              roupas[i].imageUrl,
                               height: 160,
                               width: 100,
                               fit: BoxFit.cover,
@@ -149,7 +161,7 @@ class HomePageState extends State<HomePage> {
                                 children: [
                                   SizedBox(height: 16),
                                   Text(
-                                    Database.roupas[i].title,
+                                    roupas[i].title,
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
