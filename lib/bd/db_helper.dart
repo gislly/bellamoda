@@ -3,23 +3,18 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
-  // Função para inicializar o banco de dados
   Future<Database> initDB() async {
-    // Obter o caminho do banco de dados
     String path = await getDatabasesPath();
     String dbPath = join(path, 'vestuario.db');
 
-    // Abrir o banco de dados (ou criar se não existir)
     return await openDatabase(
       dbPath,
       version: 1,
-      onCreate: _onCreate, // Definir a função de criação
+      onCreate: _onCreate,
     );
   }
 
-  // Função que será chamada ao criar o banco de dados
   FutureOr<void> _onCreate(Database db, int version) async {
-    // Criar a tabela VESTIDOS
     String createVestidosTable = '''
       CREATE TABLE VESTIDOS (
         id INTEGER PRIMARY KEY,
@@ -30,7 +25,6 @@ class DBHelper {
     ''';
     await db.execute(createVestidosTable);
 
-    // Inserir dados na tabela VESTIDOS
     await db.execute(
         "INSERT INTO VESTIDOS (id, url_image, titulo, preco) VALUES (1, 'https://mirak.jetassets.com.br/produto/20240722213142_7509992491_D.jpg', 'VESTIDO DIANA MIDI AZUL MARINO', '359,00')"
     );
@@ -41,7 +35,6 @@ class DBHelper {
         "INSERT INTO VESTIDOS (id, url_image, titulo, preco) VALUES (3, 'https://mirak.jetassets.com.br/produto/20241007185918_3470996530_D.jpg', 'VESTIDO NOEMIA OF WHITE', '320,00')"
     );
 
-    // Criar a tabela ROUPAS
     String createRoupasTable = '''
       CREATE TABLE ROUPAS (
         id INTEGER PRIMARY KEY,
@@ -52,7 +45,6 @@ class DBHelper {
     ''';
     await db.execute(createRoupasTable);
 
-    // Inserir dados na tabela ROUPAS
     await db.execute(
         "INSERT INTO ROUPAS (id, title, imageUrl, categoria) VALUES (1, 'Vestidos', 'https://mirak.jetassets.com.br/produto/20240227165413_253999747_D.jpg', 'vestidos')"
     );

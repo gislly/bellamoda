@@ -3,7 +3,6 @@ import 'package:untitled1/bd/db_helper.dart';
 import 'package:untitled1/domain/catalogodoopcoesvestidos.dart'; // Importando o modelo
 
 class VestidoDao {
-  // Método para listar todos os vestidos da tabela
   Future<List<Catalogodoopcoesvestidos>> listarVestidos() async {
     Database database = await DBHelper().initDB();
     String sql = 'SELECT * FROM VESTIDOS;';
@@ -17,7 +16,6 @@ class VestidoDao {
     return lista;
   }
 
-  // Método para listar todas as roupas da tabela
   Future<List<Catalogodoopcoesvestidos>> listarRoupas() async {
     Database database = await DBHelper().initDB();
     String sql = 'SELECT * FROM ROUPAS;';
@@ -31,7 +29,6 @@ class VestidoDao {
     return lista;
   }
 
-  // Método para inserir um novo vestido
   Future<void> inserirVestido(Catalogodoopcoesvestidos vestido) async {
     Database database = await DBHelper().initDB();
     String sql = '''
@@ -41,7 +38,6 @@ class VestidoDao {
     await database.rawInsert(sql, [vestido.urlImage, vestido.titulo, vestido.preco]);
   }
 
-  // Método para atualizar um vestido (sem id, usando dados únicos como url_image ou titulo)
   Future<void> atualizarVestido(Catalogodoopcoesvestidos vestido) async {
     Database database = await DBHelper().initDB();
     String sql = '''
@@ -53,7 +49,6 @@ class VestidoDao {
         sql, [vestido.urlImage, vestido.titulo, vestido.preco, vestido.urlImage, vestido.titulo]);
   }
 
-  // Método para deletar um vestido (sem id, usando dados únicos como url_image ou titulo)
   Future<void> deletarVestido(Catalogodoopcoesvestidos vestido) async {
     Database database = await DBHelper().initDB();
     String sql = 'DELETE FROM VESTIDOS WHERE url_image = ? AND titulo = ?;';
