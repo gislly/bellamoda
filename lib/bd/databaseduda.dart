@@ -1,4 +1,4 @@
-import 'package:untitled1/domain/vestuario.dart';
+import 'package:untitled1/domain/Vestuario.dart';
 
 class Database {
   static List<Vestuario> roupas = [
