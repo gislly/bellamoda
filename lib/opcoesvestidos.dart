@@ -8,7 +8,7 @@ import 'package:untitled1/Vestido3_page.dart';
 import 'package:untitled1/Vestido_page.dart';
 import 'package:untitled1/favoritos.dart';
 import 'package:untitled1/login.dart';
-import 'domain/Catalogodoopcoesvestidos.dart';
+import 'domain/Vestido.dart';
 
 
 class SegundaPagina extends StatefulWidget {
@@ -81,7 +81,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
     );
   }
 
-  Widget _buildList(List<Catalogodoopcoesvestidos> pacotes, Widget page) {
+  Widget _buildList(List<Vestido> pacotes, Widget page) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -92,7 +92,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
     );
   }
 
-  Widget _buildCardPacote(Catalogodoopcoesvestidos pacote, Widget page) {
+  Widget _buildCardPacote(Vestido pacote, Widget page) {
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => page));
