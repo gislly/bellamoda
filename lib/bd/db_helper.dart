@@ -12,6 +12,7 @@ class DBHelper {
       version: 1,
       onCreate: onCreate,
     );
+
   }
 
   FutureOr<void> onCreate(Database db, int version) async {
