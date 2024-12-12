@@ -19,7 +19,7 @@ class SegundaPagina extends StatefulWidget {
 }
 
 class _SegundaPaginaState extends State<SegundaPagina> {
-  List<Vestido> vestidos = [];
+  List<Catalogodoopcoesvestidos> vestidos = [];
   bool showSearchField = false;
 
   @override
@@ -37,9 +37,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAF1EB),
-        title: showSearchField
-            ? const TextField(decoration: InputDecoration(hintText: 'Pesquisar'))
-            : const Text('Segunda Página'),
+        title: showSearchField ? TextField() : Container(),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
