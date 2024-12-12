@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'carrinho.dart';
+import 'package:untitled1/carrinho_page.dart';
+import 'bd/databaseduda.dart';
 import 'pesquisa_delegate.dart'; // Ensure this is the correct file for your search delegate implementation
 import 'perfil.dart';
 import 'vestidos.dart';
 import 'blusas.dart';
 import 'calcas.dart';
 import 'shorts.dart';
-import 'bd/database.dart';
 import 'domain/vestuario.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,7 +50,7 @@ class HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Carrinho()),
+                MaterialPageRoute(builder: (context) => const CarrinhoPage()),
               );
             },
             icon: Icon(Icons.shopping_cart, color: Colors.white),

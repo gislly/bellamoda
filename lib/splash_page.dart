@@ -1,7 +1,6 @@
-import 'package:bellamoda/bd/shared_prefs.dart';
-import 'package:bellamoda/home_page.dart';
-import 'package:bellamoda/login.dart';
+
 import 'package:flutter/material.dart';
+import 'package:untitled1/home_pageduda.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

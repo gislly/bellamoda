@@ -1,6 +1,4 @@
 import 'package:sqflite/sqflite.dart';
-import 'package: untitled1/bd/db_helperduda.dart';
-import 'package: untitled1/domain/vestuario.dart';
 
 class VestuarioDao {
 
