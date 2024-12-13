@@ -1,5 +1,5 @@
-import 'package:bellamoda/bd/db_helper.dart';
-import 'package:bellamoda/domain/user.dart';
+import 'package:untitled1/bd/db_helper.dart';
+import 'package:untitled1/domain/user.dart';
 import 'package:sqflite/sqflite.dart';
 
 class UserDao {
