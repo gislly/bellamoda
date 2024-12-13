@@ -79,7 +79,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
               shrinkWrap: true,
               itemCount: Database.pacotes.length,
               itemBuilder: (context, i) {
-                return buildCardPacote(Database.pacotes[i]);
+                return buildCardPacote(Database.pacotes[i] as Catalogodoopcoesvestidos);
               },
             ),
             ListView.builder(
@@ -87,7 +87,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
               shrinkWrap: true,
               itemCount: Database2.pacotes.length,
               itemBuilder: (context, i) {
-                return buildCardVestido2(Database2.pacotes[i]);
+                return buildCardVestido2(Database2.pacotes[i] as Catalogodoopcoesvestidos);
               },
             ),
             ListView.builder(
@@ -95,7 +95,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
               shrinkWrap: true,
               itemCount: Database3.pacotes.length,
               itemBuilder: (context, i) {
-                return buildCardVestido3(Database3.pacotes[i]);
+                return buildCardVestido3(Database3.pacotes[i] as Catalogodoopcoesvestidos);
               },
             ),
           ],

@@ -28,4 +28,13 @@ class VestuarioDao {
     }
     return lista;
   }
+
+  Future<void> saveVestuario(Vestuario vestuario) async {
+    Database database = await DBHelper().initDB();
+    await database.insert(
+      'ROUPAS',
+      vestuario.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
 }
