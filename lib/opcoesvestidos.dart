@@ -8,6 +8,8 @@ import 'package:untitled1/Vestido_page.dart';
 import 'package:untitled1/favoritos.dart';
 import 'package:untitled1/login.dart';
 import 'domain/Catalogodoopcoesvestidos.dart';
+import 'package:untitled1/bd/vestido_dao.dart'; // Nome correto do arquivo
+
 
 class SegundaPagina extends StatefulWidget {
   const SegundaPagina({super.key});
@@ -17,24 +19,43 @@ class SegundaPagina extends StatefulWidget {
 }
 
 class _SegundaPaginaState extends State<SegundaPagina> {
+  List<Catalogodoopcoesvestidos> vestidos = [];
   bool showSearchField = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    vestidos = (await VestidoDao().listarVestidos()).cast<Catalogodoopcoesvestidos>();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFAF1EB),
-        title: showSearchField ? TextField() : Container(),
+        title: showSearchField
+            ? const TextField(
+          decoration: InputDecoration(
+            hintText: 'Pesquisar...',
+            border: InputBorder.none,
+          ),
+        )
+            : const Text(
+          'VESTIDOS',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 24,
+            fontWeight: FontWeight.w300,
+          ),
+        ),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const HomePage();
-                },
-              ),
-            );
+            Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF3A1B0F)),
         ),
@@ -45,7 +66,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                 showSearchField = !showSearchField;
               });
             },
-            icon: Icon(Icons.search, color: Color(0xFFA4633E)),
+            icon: const Icon(Icons.search, color: Color(0xFFA4633E)),
           ),
         ],
       ),
@@ -53,18 +74,6 @@ class _SegundaPaginaState extends State<SegundaPagina> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            Center(
-              child: Text('VESTIDOS',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black)),
-            ),
-            SizedBox(height: 16),
-
-
-
-
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -73,8 +82,6 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                 return buildCardPacote(Database.pacotes[i]);
               },
             ),
-
-
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -83,8 +90,6 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                 return buildCardVestido2(Database2.pacotes[i]);
               },
             ),
-
-
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -100,14 +105,24 @@ class _SegundaPaginaState extends State<SegundaPagina> {
   }
 
   Widget buildCardPacote(Catalogodoopcoesvestidos catalogoVestido) {
+    return buildCard(catalogoVestido, const VestidoPage());
+  }
+
+  Widget buildCardVestido2(Catalogodoopcoesvestidos catalogoVestido2) {
+    return buildCard(catalogoVestido2, const Vestido2Page());
+  }
+
+  Widget buildCardVestido3(Catalogodoopcoesvestidos catalogoVestido3) {
+    return buildCard(catalogoVestido3, const Vestido3Page());
+  }
+
+  Widget buildCard(Catalogodoopcoesvestidos catalogoVestido, Widget page) {
     return InkWell(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) {
-              return const VestidoPage();
-            },
+            builder: (context) => page,
           ),
         );
       },
@@ -137,8 +152,8 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${catalogoVestido.titulo}',
-                          style: TextStyle(
+                          catalogoVestido.titulo,
+                          style: const TextStyle(
                             fontSize: 15.7,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -147,7 +162,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                         const SizedBox(height: 8),
                         Text(
                           'R\$ ${catalogoVestido.preco}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 10.5,
                             color: Colors.black,
                           ),
@@ -160,9 +175,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) {
-                                      return const CarrinhoPage();
-                                    },
+                                    builder: (context) => const CarrinhoPage(),
                                   ),
                                 );
                               },
@@ -174,205 +187,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) {
-                                      return const FavoritosPage();
-                                    },
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.favorite,
-                                  color: Color(0xFFD6C3B6)),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildCardVestido2(Catalogodoopcoesvestidos catalogoVestido2) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return const Vestido2Page();
-            },
-          ),
-        );
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      catalogoVestido2.urlImage,
-                      width: 100,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${catalogoVestido2.titulo}',
-                          style: TextStyle(
-                            fontSize: 15.7,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'R\$ ${catalogoVestido2.preco}',
-                          style: TextStyle(
-                            fontSize: 10.5,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const CarrinhoPage();
-                                    },
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.shopping_cart,
-                                  color: Color(0xFFD6C3B6)),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const FavoritosPage();
-                                    },
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.favorite,
-                                  color: Color(0xFFD6C3B6)),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildCardVestido3(Catalogodoopcoesvestidos catalogoVestido3) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return const Vestido3Page();
-            },
-          ),
-        );
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      catalogoVestido3.urlImage,
-                      width: 100,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${catalogoVestido3.titulo}',
-                          style: TextStyle(
-                            fontSize: 15.7,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'R\$ ${catalogoVestido3.preco}',
-                          style: TextStyle(
-                            fontSize: 10.5,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const CarrinhoPage();
-                                    },
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.shopping_cart,
-                                  color: Color(0xFFD6C3B6)),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const FavoritosPage();
-                                    },
+                                    builder: (context) => const FavoritosPage(),
                                   ),
                                 );
                               },
