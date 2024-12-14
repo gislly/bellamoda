@@ -5,7 +5,6 @@ import 'package:untitled1/Vestido2_page.dart';
 import 'package:untitled1/Vestido3_page.dart';
 import 'package:untitled1/Vestido_page.dart';
 import 'package:untitled1/favoritos.dart';
-import 'package:untitled1/login.dart';
 import 'domain/Catalogodoopcoesvestidos.dart';
 import 'package:untitled1/bd/vestido_dao.dart';
 
@@ -140,7 +139,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.network(
-                      catalogoVestido.urlImagem,
+                      catalogoVestido.urlImage,
                       width: 100,
                       height: 150,
                       fit: BoxFit.cover,

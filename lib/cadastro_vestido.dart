@@ -13,7 +13,7 @@ class RegisterDress extends StatefulWidget {
 class _RegisterDressState extends State<RegisterDress> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController precoController = TextEditingController();
-  TextEditingController urlImageController = TextEditingController();
+  TextEditingController urlImagemController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _RegisterDressState extends State<RegisterDress> {
             text: 'Preço',
           ),
           buildTextFormField(
-            controller: urlImageController,
+            controller: urlImagemController,
             text: 'URL da Imagem',
           ),
           const SizedBox(height: 8),
@@ -128,14 +128,14 @@ class _RegisterDressState extends State<RegisterDress> {
   Future<void> onPressed() async {
     String nome = nomeController.text;
     double preco = double.parse(precoController.text);
-    String urlImage = urlImageController.text;
+    String urlImage = urlImagemController.text;
 
     // Criando um objeto do tipo Catalogodoopcoesvestidos
     Catalogodoopcoesvestidos vestido = Catalogodoopcoesvestidos(
       id: 0, // Define um ID padrão, já que ele será gerado no banco.
       nome: nome,
       preco: preco,
-      urlImagem: urlImage,
+      urlImage: urlImage,
     );
 
     // Salvando o vestido usando CatalogoVestidoDao
