@@ -1,27 +1,28 @@
 class Catalogodoopcoesvestidos {
-  String urlImage;
-  String titulo;
-  String preco;
+  int id;
+  String nome;
+  double preco;
+  String urlImagem;
 
   Catalogodoopcoesvestidos({
-    required this.urlImage,
-    required this.titulo,
+    required this.id,
+    required this.nome,
     required this.preco,
+    required this.urlImagem,
   });
 
-  factory Catalogodoopcoesvestidos.fromJson(Map<String, dynamic> json) {
-    return Catalogodoopcoesvestidos(
-      urlImage: json['url_image'],
-      titulo: json['titulo'],
-      preco: json['preco'],
-    );
-  }
+  Catalogodoopcoesvestidos.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        nome = json['nome'],
+        preco = json['preco'],
+        urlImagem = json['url_imagem'];
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
-      'url_image': urlImage,
-      'titulo': titulo,
+      'id': id,
+      'nome': nome,
       'preco': preco,
+      'url_imagem': urlImagem,
     };
   }
 }

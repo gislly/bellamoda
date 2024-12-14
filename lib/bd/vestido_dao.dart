@@ -1,12 +1,17 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:untitled1/bd/db_helper.dart';
-import 'package:untitled1/domain/catalogodoopcoesvestidos.dart';
+import 'package:untitled1/domain/Catalogodoopcoesvestidos.dart';
+import 'package:sqflite/sqflite.dart';
 
-class VestidoDao {
-  // Listar vestidos
+class CatalogoVestidosDao {
+  Future<void> salvarVestido(Catalogodoopcoesvestidos vestido) async {
+    Database database = await DBHelper().initDB();
+    await database.insert('CATALOGO_VESTIDOS', vestido.toJson());
+  }
+
   Future<List<Catalogodoopcoesvestidos>> listarVestidos() async {
     Database database = await DBHelper().initDB();
-    String sql = 'SELECT * FROM VESTIDOS;';
+
+    String sql = 'SELECT * FROM CATALOGO_VESTIDOS;';
     var result = await database.rawQuery(sql);
 
     List<Catalogodoopcoesvestidos> lista = [];
@@ -14,16 +19,7 @@ class VestidoDao {
       Catalogodoopcoesvestidos vestido = Catalogodoopcoesvestidos.fromJson(json);
       lista.add(vestido);
     }
-    return lista;
-  }
 
-  // Salvar vestido
-  Future<void> saveVestido(Catalogodoopcoesvestidos vestido) async {
-    Database database = await DBHelper().initDB();
-    await database.insert(
-      'VESTIDOS',
-      vestido.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    return lista;
   }
 }

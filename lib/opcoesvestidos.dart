@@ -29,7 +29,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
   }
 
   loadData() async {
-    vestidos = (await VestidoDao().listarVestidos()).cast<Catalogodoopcoesvestidos>();
+    vestidos = (await CatalogoVestidosDao().listarVestidos());
     setState(() {});
   }
 
@@ -140,7 +140,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.network(
-                      catalogoVestido.urlImage,
+                      catalogoVestido.urlImagem,
                       width: 100,
                       height: 150,
                       fit: BoxFit.cover,
@@ -152,7 +152,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          catalogoVestido.titulo,
+                          catalogoVestido.nome,
                           style: const TextStyle(
                             fontSize: 15.7,
                             fontWeight: FontWeight.bold,

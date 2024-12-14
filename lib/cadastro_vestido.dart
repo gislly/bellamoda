@@ -1,141 +1,115 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:untitled1/domain/Catalogodoopcoesvestidos.dart';
+import 'bd/vestido_dao.dart';
 
-class CadastrarVestidos extends StatefulWidget {
-  const CadastrarVestidos({super.key});
+class RegisterDress extends StatefulWidget {
+  const RegisterDress({super.key});
 
   @override
-  State<CadastrarVestidos> createState() => _CadastrarVestidosState();
+  State<RegisterDress> createState() => _RegisterDressState();
 }
 
-class _CadastrarVestidosState extends State<CadastrarVestidos> {
-  final TextEditingController nomeController1 = TextEditingController();
-  final TextEditingController precoController1 = TextEditingController();
-  final TextEditingController imageUrlController1 = TextEditingController();
-
-  final TextEditingController nomeController2 = TextEditingController();
-  final TextEditingController precoController2 = TextEditingController();
-  final TextEditingController imageUrlController2 = TextEditingController();
-
-  final TextEditingController nomeController3 = TextEditingController();
-  final TextEditingController precoController3 = TextEditingController();
-  final TextEditingController imageUrlController3 = TextEditingController();
-
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+class _RegisterDressState extends State<RegisterDress> {
+  TextEditingController nomeController = TextEditingController();
+  TextEditingController precoController = TextEditingController();
+  TextEditingController urlImageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Cadastrar Vestidos',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
+        appBar: buildAppBar(),
+        body: buildBody(),
+      ),
+    );
+  }
+
+  buildBody() {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: ListView(
+        children: [
+          buildTextFormField(
+            controller: nomeController,
+            text: 'Nome do Vestido',
           ),
-          backgroundColor: const Color(0xFFA1887F),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Form(
-            key: formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  buildVestidoForm(1, nomeController1, precoController1, imageUrlController1),
-                  const SizedBox(height: 16),
-                  buildVestidoForm(2, nomeController2, precoController2, imageUrlController2),
-                  const SizedBox(height: 16),
-                  buildVestidoForm(3, nomeController3, precoController3, imageUrlController3),
-                  const SizedBox(height: 32),
-                  ElevatedButton(
-                    onPressed: onSave,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE81F7C),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Text(
-                        'Salvar',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+          buildTextFormField(
+            controller: precoController,
+            text: 'Preço',
+          ),
+          buildTextFormField(
+            controller: urlImageController,
+            text: 'URL da Imagem',
+          ),
+          const SizedBox(height: 8),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF3F68F7),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
               ),
             ),
-          ),
+            onPressed: onPressed,
+            child: const Text(
+              'Cadastrar Vestido',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  buildTextFormField({
+    required TextEditingController controller,
+    required String text,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: TextFormField(
+        controller: controller,
+        validator: fieldValidator,
+        decoration: buildInputDecoration(text),
+        cursorColor: const Color(0xFF10397B),
+      ),
+    );
+  }
+
+  String? fieldValidator(value) {
+    if (value == null || value.isEmpty) {
+      return "Este campo não pode ser vazio!";
+    } else {
+      return null;
+    }
+  }
+
+  buildAppBar() {
+    return AppBar(
+      centerTitle: false,
+      backgroundColor: const Color(0xFF10397B),
+      iconTheme: const IconThemeData(
+        color: Colors.white, // Mudar cor aqui
+      ),
+      title: const Text(
+        'Cadastrar Novo Vestido',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );
   }
 
-  Widget buildVestidoForm(
-      int index, TextEditingController nomeController, TextEditingController precoController, TextEditingController imageUrlController) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          'Vestido $index',
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 8),
-        TextFormField(
-          controller: nomeController,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'O nome é obrigatório!';
-            }
-            return null;
-          },
-          decoration: buildInputDecoration('Nome'),
-          cursorColor: const Color(0xFF10397B),
-        ),
-        const SizedBox(height: 8),
-        TextFormField(
-          controller: precoController,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'O preço é obrigatório!';
-            }
-            return null;
-          },
-          decoration: buildInputDecoration('Preço'),
-          cursorColor: const Color(0xFF10397B),
-        ),
-        const SizedBox(height: 8),
-        TextFormField(
-          controller: imageUrlController,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'A URL da imagem é obrigatória!';
-            }
-            return null;
-          },
-          decoration: buildInputDecoration('URL da Imagem'),
-          cursorColor: const Color(0xFF10397B),
-        ),
-      ],
-    );
-  }
-
-  InputDecoration buildInputDecoration(String label) {
+  buildInputDecoration(String name) {
     return InputDecoration(
-      label: Text(label),
-      floatingLabelStyle: const TextStyle(
-        color: Color(0xFF10397B),
+      label: Text(name),
+      floatingLabelStyle: GoogleFonts.montserrat(
+        color: const Color(0xFF10397B),
         fontWeight: FontWeight.w600,
       ),
       border: OutlineInputBorder(
@@ -151,26 +125,23 @@ class _CadastrarVestidosState extends State<CadastrarVestidos> {
     );
   }
 
-  Future<void> onSave() async {
-    if (formKey.currentState!.validate()) {
-      String nome1 = nomeController1.text;
-      String preco1 = precoController1.text;
-      String imageUrl1 = imageUrlController1.text;
+  Future<void> onPressed() async {
+    String nome = nomeController.text;
+    double preco = double.parse(precoController.text);
+    String urlImage = urlImageController.text;
 
-      String nome2 = nomeController2.text;
-      String preco2 = precoController2.text;
-      String imageUrl2 = imageUrlController2.text;
+    // Criando um objeto do tipo Catalogodoopcoesvestidos
+    Catalogodoopcoesvestidos vestido = Catalogodoopcoesvestidos(
+      id: 0, // Define um ID padrão, já que ele será gerado no banco.
+      nome: nome,
+      preco: preco,
+      urlImagem: urlImage,
+    );
 
-      String nome3 = nomeController3.text;
-      String preco3 = precoController3.text;
-      String imageUrl3 = imageUrlController3.text;
+    // Salvando o vestido usando CatalogoVestidoDao
+    await CatalogoVestidosDao().salvarVestido(vestido);
 
-      // Salvar os dados ou fazer algo com eles
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Vestidos cadastrados com sucesso!')),
-      );
-
-      Navigator.pop(context);
-    }
+    // Navegar de volta após o cadastro
+    Navigator.pop(context);
   }
 }
