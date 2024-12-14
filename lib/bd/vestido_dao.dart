@@ -5,13 +5,13 @@ import 'package:sqflite/sqflite.dart';
 class CatalogoVestidosDao {
   Future<void> salvarVestido(Catalogodoopcoesvestidos vestido) async {
     Database database = await DBHelper().initDB();
-    await database.insert('CATALOGO_VESTIDOS', vestido.toJson());
+    await database.insert('VESTIDOS', vestido.toJson());
   }
 
   Future<List<Catalogodoopcoesvestidos>> listarVestidos() async {
     Database database = await DBHelper().initDB();
 
-    String sql = 'SELECT * FROM CATALOGO_VESTIDOS;';
+    String sql = 'SELECT * FROM VESTIDOS;';
     var result = await database.rawQuery(sql);
 
     List<Catalogodoopcoesvestidos> lista = [];
