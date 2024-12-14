@@ -8,7 +8,7 @@ import 'package:untitled1/Vestido_page.dart';
 import 'package:untitled1/favoritos.dart';
 import 'package:untitled1/login.dart';
 import 'domain/Catalogodoopcoesvestidos.dart';
-import 'package:untitled1/bd/vestido_dao.dart'; // Nome correto do arquivo
+import 'package:untitled1/bd/vestido_dao.dart';
 
 
 class SegundaPagina extends StatefulWidget {
