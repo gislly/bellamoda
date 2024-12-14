@@ -130,7 +130,7 @@ class _RegisterDressState extends State<RegisterDress> {
     double preco = double.parse(precoController.text);
     String urlImage = urlImagemController.text;
 
-    // Criando um objeto do tipo Catalogodoopcoesvestidos
+
     Catalogodoopcoesvestidos vestido = Catalogodoopcoesvestidos(
       id: 0, // Define um ID padrão, já que ele será gerado no banco.
       titulo: nome,
