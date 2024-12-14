@@ -38,10 +38,10 @@ class _VestidoPageState extends State<VestidoPage> {
           ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: Database.infos.length,
+            itemCount: Database.pacotes.length,
             itemBuilder: (context, index) {
               return ItemCatalogoCard(
-                itemCatalogo: Database.infos[index],
+                itemCatalogo: Database.pacotes[index],
               );
             },
           ),
