@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/bd/Databasedoopcoesvestidos.dart';
 import 'package:untitled1/carrinho_page.dart';
-import 'package:untitled1/domain/Catalogodovestido.dart';
 import 'package:untitled1/Vestido2_page.dart';
 import 'package:untitled1/Vestido3_page.dart';
 import 'package:untitled1/Vestido_page.dart';
@@ -9,6 +8,7 @@ import 'package:untitled1/favoritos.dart';
 import 'package:untitled1/login.dart';
 import 'domain/Catalogodoopcoesvestidos.dart';
 import 'package:untitled1/bd/vestido_dao.dart';
+
 
 
 class SegundaPagina extends StatefulWidget {

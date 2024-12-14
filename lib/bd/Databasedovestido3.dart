@@ -1,7 +1,7 @@
 import 'package:untitled1/domain/Catalogodovestido3.dart';
 
 class Database {
-  static List infos = [
+  static List <Catalogodovestido3> pacotes = [
     Catalogodovestido3(
       urlImage:
       'https://mirak.jetassets.com.br/produto/20241007185918_3470996530_D.jpg',
