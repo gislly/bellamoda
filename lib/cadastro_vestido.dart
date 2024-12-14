@@ -140,8 +140,5 @@ class _RegisterDressState extends State<RegisterDress> {
 
     // Salvando o vestido usando CatalogoVestidoDao
     await CatalogoVestidosDao().salvarVestido(vestido);
-
-    // Navegar de volta após o cadastro
-    Navigator.pop(context);
   }
 }
