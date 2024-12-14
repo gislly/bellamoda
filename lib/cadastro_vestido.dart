@@ -133,7 +133,7 @@ class _RegisterDressState extends State<RegisterDress> {
     // Criando um objeto do tipo Catalogodoopcoesvestidos
     Catalogodoopcoesvestidos vestido = Catalogodoopcoesvestidos(
       id: 0, // Define um ID padrão, já que ele será gerado no banco.
-      nome: nome,
+      titulo: nome,
       preco: preco,
       urlImage: urlImage,
     );

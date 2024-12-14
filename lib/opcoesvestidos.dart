@@ -151,7 +151,7 @@ class _SegundaPaginaState extends State<SegundaPagina> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          catalogoVestido.nome,
+                          catalogoVestido.titulo,
                           style: const TextStyle(
                             fontSize: 15.7,
                             fontWeight: FontWeight.bold,
