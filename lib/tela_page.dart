@@ -1,23 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/bd/user_dao.dart';
-import 'package:untitled1/telacadastro_page.dart';
-
+import 'package:untitled2/telacadastro_page.dart';
+import 'bd/shared_prefs.dart';
+import 'bd/user_dao.dart';
 import 'esqueceuasenha_page.dart';
 import 'home_pageduda.dart';
+
+
+
+
+
+
 
 
 class TelaPage extends StatefulWidget {
   const TelaPage({super.key});
 
+
+
+
   @override
   State<TelaPage> createState() => _TelaPageState();
 }
+
+
+
 
 class _TelaPageState extends State<TelaPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
 
+
+
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +78,7 @@ class _TelaPageState extends State<TelaPage> {
                   prefixIcon: Icon(Icons.person),
                 ),
                 controller: emailController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   if (value == null || value.isEmpty || !value.contains("@")) {
                     return "Você precisa digitar um e-mail válido!";
@@ -79,6 +98,7 @@ class _TelaPageState extends State<TelaPage> {
                 ),
                 controller: senhaController,
                 obscureText: true,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   if (value == null || value.length < 6 ||  value.isEmpty) {
                     return "Você precisa digitar uma senha válida!";
@@ -107,19 +127,28 @@ class _TelaPageState extends State<TelaPage> {
               Center(
                 child: ElevatedButton(
                   onPressed: () async {
-                    // Validar o Form
+
+
                     if (formKey.currentState!.validate()) {
+
+
                       String email = emailController.text;
                       String senha = senhaController.text;
 
-                      // Chama a autenticação usando o UserDao
+
+
+
                       bool auth = await UserDao().autenticar(email, senha);
 
-                      if (auth) {
-                        // Se a autenticação for bem-sucedida, salva o estado do usuário
-                        SharedPrefs().setUser(true);
 
-                        // Navega para a HomePage
+                      if (auth) {
+
+
+                        await SharedPrefs().setUser(true);
+
+
+
+
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -129,7 +158,6 @@ class _TelaPageState extends State<TelaPage> {
                           ),
                         );
                       } else {
-                        // Se a autenticação falhar, exibe uma mensagem no console
                         print('Usuário e/ou Senha incorreto(s)!');
                       }
                     }
@@ -196,11 +224,26 @@ class _TelaPageState extends State<TelaPage> {
             ],
 
 
+
+
+
+
+
+
           ),
         ),
       ),
 
+
+
+
     );
+
+
+
+
+
+
 
 
   }

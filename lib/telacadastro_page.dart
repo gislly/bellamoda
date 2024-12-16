@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'tela_page.dart';
+import 'package:untitled1/domain/user.dart';
+import 'package:untitled1/bd/user_dao.dart';
+
 
 class TelaCadastroPage extends StatefulWidget {
   const TelaCadastroPage({super.key});
 
+
   @override
   State<TelaCadastroPage> createState() => _TelaCadastroPageState();
 }
+
 
 class _TelaCadastroPageState extends State<TelaCadastroPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -18,7 +23,8 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
   final TextEditingController confirmarSenhaController =
-      TextEditingController();
+  TextEditingController();
+
 
   String? validateSenha(String? value) {
     if (value == null || value.isEmpty) {
@@ -28,6 +34,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
     }
     return null;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +98,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                       hintStyle: TextStyle(color: Colors.grey),
                       labelText: 'Nome',
                       labelStyle:
-                          TextStyle(fontSize: 15, color: Color(0xff646161)),
+                      TextStyle(fontSize: 15, color: Color(0xff646161)),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) => value == null || value.isEmpty
@@ -106,7 +113,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                       hintStyle: TextStyle(color: Colors.grey),
                       labelText: 'Idade',
                       labelStyle:
-                          TextStyle(fontSize: 15, color: Color(0xff646161)),
+                      TextStyle(fontSize: 15, color: Color(0xff646161)),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) => value == null || value.isEmpty
@@ -121,7 +128,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                       hintStyle: TextStyle(color: Colors.grey),
                       labelText: 'CEP',
                       labelStyle:
-                          TextStyle(fontSize: 15, color: Color(0xff646161)),
+                      TextStyle(fontSize: 15, color: Color(0xff646161)),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) => value == null || value.isEmpty
@@ -136,7 +143,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                       hintStyle: TextStyle(color: Colors.grey),
                       labelText: 'Telefone',
                       labelStyle:
-                          TextStyle(fontSize: 15, color: Color(0xff646161)),
+                      TextStyle(fontSize: 15, color: Color(0xff646161)),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) => value == null || value.isEmpty
@@ -151,7 +158,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                       hintStyle: TextStyle(color: Colors.grey),
                       labelText: 'CPF',
                       labelStyle:
-                          TextStyle(fontSize: 15, color: Color(0xff646161)),
+                      TextStyle(fontSize: 15, color: Color(0xff646161)),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) => value == null || value.isEmpty
@@ -166,7 +173,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                       hintStyle: TextStyle(color: Colors.grey),
                       labelText: 'Email',
                       labelStyle:
-                          TextStyle(fontSize: 15, color: Color(0xff646161)),
+                      TextStyle(fontSize: 15, color: Color(0xff646161)),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) => value == null || value.isEmpty
@@ -181,7 +188,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                       hintStyle: TextStyle(color: Colors.grey),
                       labelText: 'Senha',
                       labelStyle:
-                          TextStyle(fontSize: 15, color: Color(0xff646161)),
+                      TextStyle(fontSize: 15, color: Color(0xff646161)),
                       border: OutlineInputBorder(),
                     ),
                     obscureText: true,
@@ -195,7 +202,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                       hintStyle: TextStyle(color: Colors.grey),
                       labelText: 'Confirmar senha',
                       labelStyle:
-                          TextStyle(fontSize: 15, color: Color(0xff646161)),
+                      TextStyle(fontSize: 15, color: Color(0xff646161)),
                       border: OutlineInputBorder(),
                     ),
                     obscureText: true,
@@ -209,9 +216,16 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                   SizedBox(height: 40),
                   Center(
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (formKey.currentState?.validate() == true) {
-                          // Navegar para a TelaPage
+                          String senha = senhaController.text;
+                          String email = emailController.text;
+
+
+                          User user = User(email, senha);
+                          await UserDao().saveUser(user);
+
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => TelaPage()),
@@ -221,7 +235,7 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF4A2C2A),
                         padding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                        EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -241,3 +255,4 @@ class _TelaCadastroPageState extends State<TelaCadastroPage> {
     );
   }
 }
+
