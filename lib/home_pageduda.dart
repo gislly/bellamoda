@@ -7,8 +7,9 @@ import 'package:untitled1/blusas.dart';
 import 'package:untitled1/calcas.dart';
 import 'package:untitled1/shorts.dart';
 import 'package:untitled1/bd/databaseduda.dart';
-import 'package:untitled1/domain/Vestuario.dart';
+import 'package:untitled1/domain/vestuario.dart';
 import 'package:untitled1/bd/vestuario_dao.dart';
+import 'package:untitled1/cadastrar_vestuario.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,6 +29,7 @@ class HomePageState extends State<HomePage> {
 
   loadData() async {
     roupas = await VestuarioDao().listarRoupas();
+    print(roupas);
     setState(() {});
   }
 
@@ -69,6 +71,16 @@ class HomePageState extends State<HomePage> {
             },
             icon: Icon(Icons.shopping_cart, color: Colors.white),
           ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const CadastrarVestuario()),
+              );
+            },
+            icon: Icon(Icons.add, color: Colors.white),
+          ),
         ],
       ),
       backgroundColor: Color(0xFFEFEBE9),
@@ -104,9 +116,9 @@ class HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('FIQUE POR DENTRO DAS NOVIDADES',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                    style:
+                    TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                 SizedBox(height: 16),
-                // Exibindo as categorias de roupas carregadas do banco de dados
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -118,26 +130,29 @@ class HomePageState extends State<HomePage> {
                           case 0:
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Vestidos()),
+                              MaterialPageRoute(
+                                  builder: (context) => const Vestidos()),
                             );
                             break;
                           case 1:
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Blusas()),
+                              MaterialPageRoute(
+                                  builder: (context) => const Blusas()),
                             );
                             break;
                           case 2:
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Calcas()),
+                              MaterialPageRoute(
+                                  builder: (context) => const Calcas()),
                             );
                             break;
                           case 3:
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const Shorts()),
-                            );
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Shorts()));
                             break;
                           default:
                             break;
@@ -147,9 +162,8 @@ class HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Row(
                           children: [
-                            // Exibe a imagem e título da categoria
                             Image.network(
-                              roupas[i].imageUrl,
+                              roupas[i].urlImage,
                               height: 160,
                               width: 100,
                               fit: BoxFit.cover,
@@ -161,7 +175,7 @@ class HomePageState extends State<HomePage> {
                                 children: [
                                   SizedBox(height: 16),
                                   Text(
-                                    roupas[i].title,
+                                    roupas[i].titulo,
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
