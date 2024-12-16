@@ -1,16 +1,25 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:untitled1/bd/db_helper.dart';
-import 'package:untitled1/domain/tela_carrinho.dart';
-
+import '/bd/db_helper.dart';
+import '/domain/carrinho.dart';
+import 'package:flutter/material.dart';
 class CarrinhoDao {
-  Future<List<TelaCarrinho>> listarPacotes() async {
+  salvarCarrinho(Carrinho carrinho) async {
     Database database = await DBHelper().initDB();
-
-    String sql = 'SELECT * FROM PACOTE;';
+    database.insert(
+      'PEÇAS',
+      carrinho.toJson(),
+    );
+  }
+  listarPecas() async {
+    Database database = await DBHelper().initDB();
+    String sql = 'SELECT * FROM PECAS;';
     var result = await database.rawQuery(sql);
-
-    List<TelaCarrinho> lista = result.map((json) => TelaCarrinho.fromJson(json)).toList();
-
+    List<Carrinho> lista = [];
+    for (var json in result) {
+      CarrinhosalvarPeca(peca) {}
+      Carrinho carrinho = Carrinho.fromJson(json);
+      lista.add(carrinho);
+    }
     return lista;
   }
 }

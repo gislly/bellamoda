@@ -55,5 +55,20 @@ class DBHelper {
     sql =
     "INSERT INTO USER(username, password) VALUES('contatobellamoda@gmail.com', 'roupas123')";
     await db.execute(sql);
+
+    //TABLE CARRINHO
+    sql =
+    'CREATE TABLE PECAS (id INTEGER PRIMARY KEY AUTOINCREMENT, url_image VARCHAR(255), titulo VARCHAR(100), preco VARCHAR(100), descricao VARCHAR(100));';
+    await db.execute(sql);
+    sql =
+    //CARRINHO
+    "INSERT INTO PECAS (id, url_image, titulo, preco, descricao) VALUES (NULL, 'https://mirak.jetassets.com.br/produto/multifotos/hd/20240627091645_6846993154_DZ.jpg', 'VESTIDO DIANA', '359,00', 'Vestido em couro curto')";
+    await db.execute(sql);
+    sql =
+    "INSERT INTO PECAS (id, url_image, titulo, preco, descricao) VALUES (NULL, 'https://mirak.jetassets.com.br/produto/multifotos/hd/20240621163405_3343996657_DMZ.jpg', 'SHORT LAYNE', '200,00', Short em alfaiataria claro)";
+    await db.execute(sql);
+    sql =
+    "INSERT INTO PECAS (id, url_image, titulo, preco, descricao) VALUES (NULL, 'https://mirak.jetassets.com.br/produto/multifotos/20240818094046_9628990372_DM.jpg', 'CALÇA SCARLY', '320,00', Calça em alfaiataria preta)";
+    await db.execute(sql);
   }
 }

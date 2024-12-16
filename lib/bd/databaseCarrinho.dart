@@ -1,22 +1,25 @@
-import '/domain/tela_carrinho.dart';
 
+import '/domain/carrinho.dart';
 class DataBaseCarrinho {
-  static List pacotes = [
-    TelaCarrinho(
+  static List PECAS = [
+    Carrinho(
+      id: 0,
       urlImage:
       'https://mirak.jetassets.com.br/produto/multifotos/hd/20240627091645_6846993154_DZ.jpg',
       titulo: 'Vestido Diana',
       preco: '270,00',
       descricao: 'Vestido em couro curto',
     ),
-    TelaCarrinho(
+    Carrinho(
+      id: 0,
       urlImage:
       'https://mirak.jetassets.com.br/produto/multifotos/hd/20240621163405_3343996657_DMZ.jpg',
       titulo: 'Short Layne',
       preco: '200,00',
       descricao: 'Short em alfaiataria claro',
     ),
-    TelaCarrinho(
+    Carrinho(
+      id: 0,
       urlImage:
       'https://mirak.jetassets.com.br/produto/multifotos/20240818094046_9628990372_DM.jpg',
       titulo: 'Calça Scarly',
