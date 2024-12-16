@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled2/telacadastro_page.dart';
+import 'package:untitled1/telacadastro_page.dart';
 import 'bd/shared_prefs.dart';
 import 'bd/user_dao.dart';
 import 'esqueceuasenha_page.dart';
